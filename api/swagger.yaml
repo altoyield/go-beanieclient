@@ -1,0 +1,3897 @@
+---
+swagger: "2.0"
+info:
+  description: "An API specification for interacting with the Beanie ERP system"
+  version: "0.2"
+  title: "Beanie ERP API"
+  termsOfService: "https://bean.ie/terms"
+  contact:
+    name: "Beanie ERP API Team"
+    email: "dev@bean.ie"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "bean.ie"
+basePath: "/"
+tags:
+- name: "Beanie"
+  description: "Beanie ERP API"
+  externalDocs:
+    description: "For more information, please consult the online help pages for the\
+      \ API"
+    url: "https://bean.ie/api/help"
+schemes:
+- "https"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+security:
+- api_key: []
+paths:
+  /address_blocks/{id}:
+    get:
+      tags:
+      - "address_block"
+      summary: "Find Address block by ID"
+      description: "Returns a single address block if the user has access"
+      operationId: "findAddressBlockById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of address block to fetch"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Id"
+      responses:
+        200:
+          description: "Address block response"
+          schema:
+            $ref: "#/definitions/AddressBlock"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /address_blocks:
+    get:
+      tags:
+      - "address_block"
+      summary: "All address block"
+      description: "Returns all address block from the system that the user has access\
+        \ to"
+      operationId: "findAddressBlocks"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "tags"
+        in: "query"
+        description: "tags to filter by"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "csv"
+        x-exportParamName: "Tags"
+      - name: "limit"
+        in: "query"
+        description: "Maximum number of results to return"
+        required: false
+        type: "integer"
+        format: "int32"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int32"
+      responses:
+        200:
+          description: "List of address block"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/AddressBlock"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+    post:
+      tags:
+      - "address_block"
+      description: "Creates a new address block in the system"
+      operationId: "addAddressBlock"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "address_blocks"
+        description: "Address block to add to the system"
+        required: true
+        schema:
+          $ref: "#/definitions/AddressBlockInput"
+        x-exportParamName: "AddressBlocks"
+      responses:
+        200:
+          description: "address block response"
+          schema:
+            $ref: "#/definitions/AddressBlock"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /bank_accounts/{id}:
+    get:
+      tags:
+      - "bank_account"
+      summary: "Find Bank Account by ID"
+      description: "Returns a single bank account if the user has access"
+      operationId: "findBankAccountById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of bank account to fetch"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Id"
+      responses:
+        200:
+          description: "Bank account response"
+          schema:
+            $ref: "#/definitions/BankAccount"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /bank_accounts:
+    get:
+      tags:
+      - "bank_account"
+      summary: "All bank accounts"
+      description: "Returns all bank accounts from the system that the user has access\
+        \ to"
+      operationId: "findBankAccounts"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "tags"
+        in: "query"
+        description: "tags to filter by"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "csv"
+        x-exportParamName: "Tags"
+      - name: "limit"
+        in: "query"
+        description: "maximum number of results to return"
+        required: false
+        type: "integer"
+        format: "int32"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int32"
+      responses:
+        200:
+          description: "List of bank accounts"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/BankAccount"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+    post:
+      tags:
+      - "bank_account"
+      description: "Creates a new bank account in the system"
+      operationId: "addBankAccount"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "bank_account"
+        description: "Bank account to add to the system"
+        required: true
+        schema:
+          $ref: "#/definitions/BankAccountInput"
+        x-exportParamName: "BankAccount"
+      responses:
+        200:
+          description: "bank account response"
+          schema:
+            $ref: "#/definitions/BankAccount"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /bank_statements/{id}:
+    get:
+      tags:
+      - "bank_statement"
+      summary: "Find Bank statement by ID"
+      description: "Returns a single bank statement if the user has access"
+      operationId: "findBankStatementById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of bank statement to fetch"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Id"
+      responses:
+        200:
+          description: "Bank statement response"
+          schema:
+            $ref: "#/definitions/BankStatement"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /bank_statements:
+    get:
+      tags:
+      - "bank_statement"
+      summary: "All bank statement"
+      description: "Returns all bank statement from the system that the user has access\
+        \ to"
+      operationId: "findBankStatements"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "tags"
+        in: "query"
+        description: "tags to filter by"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "csv"
+        x-exportParamName: "Tags"
+      - name: "limit"
+        in: "query"
+        description: "Maximum number of results to return"
+        required: false
+        type: "integer"
+        format: "int32"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int32"
+      responses:
+        200:
+          description: "List of bank statement"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/BankStatement"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+    post:
+      tags:
+      - "bank_statement"
+      description: "Creates a new bank statement in the system"
+      operationId: "addBankStatement"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "bank_statements"
+        description: "Bank statement to add to the system"
+        required: true
+        schema:
+          $ref: "#/definitions/BankStatementInput"
+        x-exportParamName: "BankStatements"
+      responses:
+        200:
+          description: "bank statement response"
+          schema:
+            $ref: "#/definitions/BankStatement"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /beanie_tasks/{id}:
+    get:
+      tags:
+      - "beanie_task"
+      summary: "Find Beanie task by ID"
+      description: "Returns a single beanie task if the user has access"
+      operationId: "findBeanieTaskById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of beanie task to fetch"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Id"
+      responses:
+        200:
+          description: "Beanie task response"
+          schema:
+            $ref: "#/definitions/BeanieTask"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /beanie_tasks:
+    get:
+      tags:
+      - "beanie_task"
+      summary: "All beanie task"
+      description: "Returns all beanie task from the system that the user has access\
+        \ to"
+      operationId: "findBeanieTasks"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "tags"
+        in: "query"
+        description: "tags to filter by"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "csv"
+        x-exportParamName: "Tags"
+      - name: "limit"
+        in: "query"
+        description: "Maximum number of results to return"
+        required: false
+        type: "integer"
+        format: "int32"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int32"
+      responses:
+        200:
+          description: "List of beanie task"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/BeanieTask"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+    post:
+      tags:
+      - "beanie_task"
+      description: "Creates a new beanie task in the system"
+      operationId: "addBeanieTask"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "beanie_tasks"
+        description: "Beanie task to add to the system"
+        required: true
+        schema:
+          $ref: "#/definitions/BeanieTaskInput"
+        x-exportParamName: "BeanieTasks"
+      responses:
+        200:
+          description: "beanie task response"
+          schema:
+            $ref: "#/definitions/BeanieTask"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /billables/{id}:
+    get:
+      tags:
+      - "billable"
+      summary: "Find Billable record by ID"
+      description: "Returns a single billable record if the user has access"
+      operationId: "findBillableById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of billable record to fetch"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Id"
+      responses:
+        200:
+          description: "Billable record response"
+          schema:
+            $ref: "#/definitions/Billable"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /billables:
+    get:
+      tags:
+      - "billable"
+      summary: "All billable record"
+      description: "Returns all billable record from the system that the user has\
+        \ access to"
+      operationId: "findBillables"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "tags"
+        in: "query"
+        description: "tags to filter by"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "csv"
+        x-exportParamName: "Tags"
+      - name: "limit"
+        in: "query"
+        description: "Maximum number of results to return"
+        required: false
+        type: "integer"
+        format: "int32"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int32"
+      responses:
+        200:
+          description: "List of billable record"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Billable"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+    post:
+      tags:
+      - "billable"
+      description: "Creates a new billable record in the system"
+      operationId: "addBillable"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "billables"
+        description: "Billable record to add to the system"
+        required: true
+        schema:
+          $ref: "#/definitions/BillableInput"
+        x-exportParamName: "Billables"
+      responses:
+        200:
+          description: "billable record response"
+          schema:
+            $ref: "#/definitions/Billable"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /bill_of_materials/{id}:
+    get:
+      tags:
+      - "bill_of_materials"
+      summary: "Find Bill of Materials by ID"
+      description: "Returns a single bill of materials if the user has access"
+      operationId: "findBillOfMaterialById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of bill of materials to fetch"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Id"
+      responses:
+        200:
+          description: "Bill of Materials response"
+          schema:
+            $ref: "#/definitions/BillOfMaterial"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /bill_of_materials:
+    get:
+      tags:
+      - "bill_of_materials"
+      summary: "All bill of materials"
+      description: "Returns all bill of materials from the system that the user has\
+        \ access to"
+      operationId: "findBillOfMaterials"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "tags"
+        in: "query"
+        description: "tags to filter by"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "csv"
+        x-exportParamName: "Tags"
+      - name: "limit"
+        in: "query"
+        description: "Maximum number of results to return"
+        required: false
+        type: "integer"
+        format: "int32"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int32"
+      responses:
+        200:
+          description: "List of bill of materials"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/BillOfMaterial"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+    post:
+      tags:
+      - "bill_of_materials"
+      description: "Creates a new bill of materials in the system"
+      operationId: "addBillOfMaterial"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "bill_of_materials"
+        description: "Bill of Materials to add to the system"
+        required: true
+        schema:
+          $ref: "#/definitions/BillOfMaterialInput"
+        x-exportParamName: "BillOfMaterials"
+      responses:
+        200:
+          description: "bill of materials response"
+          schema:
+            $ref: "#/definitions/BillOfMaterial"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /companies/{id}:
+    get:
+      tags:
+      - "company"
+      summary: "Find Company details by ID"
+      description: "Returns a single company details if the user has access"
+      operationId: "findCompanyById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of company details to fetch"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Id"
+      responses:
+        200:
+          description: "Company details response"
+          schema:
+            $ref: "#/definitions/Company"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /delivery_notes/{id}:
+    get:
+      tags:
+      - "delivery_note"
+      summary: "Find Delivery note by ID"
+      description: "Returns a single delivery note if the user has access"
+      operationId: "findDeliveryNoteById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of delivery note to fetch"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Id"
+      responses:
+        200:
+          description: "Delivery note response"
+          schema:
+            $ref: "#/definitions/DeliveryNote"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /delivery_notes:
+    get:
+      tags:
+      - "delivery_note"
+      summary: "All delivery note"
+      description: "Returns all delivery note from the system that the user has access\
+        \ to"
+      operationId: "findDeliveryNotes"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "tags"
+        in: "query"
+        description: "tags to filter by"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "csv"
+        x-exportParamName: "Tags"
+      - name: "limit"
+        in: "query"
+        description: "Maximum number of results to return"
+        required: false
+        type: "integer"
+        format: "int32"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int32"
+      responses:
+        200:
+          description: "List of delivery note"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/DeliveryNote"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+    post:
+      tags:
+      - "delivery_note"
+      description: "Creates a new delivery note in the system"
+      operationId: "addDeliveryNote"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "delivery_notes"
+        description: "Delivery note to add to the system"
+        required: true
+        schema:
+          $ref: "#/definitions/DeliveryNoteInput"
+        x-exportParamName: "DeliveryNotes"
+      responses:
+        200:
+          description: "delivery note response"
+          schema:
+            $ref: "#/definitions/DeliveryNote"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /documents/{id}:
+    get:
+      tags:
+      - "document"
+      summary: "Find Document by ID"
+      description: "Returns a single document if the user has access"
+      operationId: "findDocumentById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of document to fetch"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Id"
+      responses:
+        200:
+          description: "Document response"
+          schema:
+            $ref: "#/definitions/Document"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /documents:
+    get:
+      tags:
+      - "document"
+      summary: "All document"
+      description: "Returns all document from the system that the user has access\
+        \ to"
+      operationId: "findDocuments"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "tags"
+        in: "query"
+        description: "tags to filter by"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "csv"
+        x-exportParamName: "Tags"
+      - name: "limit"
+        in: "query"
+        description: "Maximum number of results to return"
+        required: false
+        type: "integer"
+        format: "int32"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int32"
+      responses:
+        200:
+          description: "List of document"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Document"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+    post:
+      tags:
+      - "document"
+      description: "Creates a new document in the system"
+      operationId: "addDocument"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "documents"
+        description: "Document to add to the system"
+        required: true
+        schema:
+          $ref: "#/definitions/DocumentInput"
+        x-exportParamName: "Documents"
+      responses:
+        200:
+          description: "document response"
+          schema:
+            $ref: "#/definitions/Document"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /fixed_assets/{id}:
+    get:
+      tags:
+      - "fixed_asset"
+      summary: "Find Fixed asset by ID"
+      description: "Returns a single fixed asset if the user has access"
+      operationId: "findFixedAssetById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of fixed asset to fetch"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Id"
+      responses:
+        200:
+          description: "Fixed asset response"
+          schema:
+            $ref: "#/definitions/FixedAsset"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /fixed_assets:
+    get:
+      tags:
+      - "fixed_asset"
+      summary: "All fixed asset"
+      description: "Returns all fixed asset from the system that the user has access\
+        \ to"
+      operationId: "findFixedAssets"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "tags"
+        in: "query"
+        description: "tags to filter by"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "csv"
+        x-exportParamName: "Tags"
+      - name: "limit"
+        in: "query"
+        description: "Maximum number of results to return"
+        required: false
+        type: "integer"
+        format: "int32"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int32"
+      responses:
+        200:
+          description: "List of fixed asset"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/FixedAsset"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+    post:
+      tags:
+      - "fixed_asset"
+      description: "Creates a new fixed asset in the system"
+      operationId: "addFixedAsset"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "fixed_assets"
+        description: "Fixed asset to add to the system"
+        required: true
+        schema:
+          $ref: "#/definitions/FixedAssetInput"
+        x-exportParamName: "FixedAssets"
+      responses:
+        200:
+          description: "fixed asset response"
+          schema:
+            $ref: "#/definitions/FixedAsset"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /images/{id}:
+    get:
+      tags:
+      - "image"
+      summary: "Find Image by ID"
+      description: "Returns a single image if the user has access"
+      operationId: "findImageById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of image to fetch"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Id"
+      responses:
+        200:
+          description: "Image response"
+          schema:
+            $ref: "#/definitions/Image"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /images:
+    get:
+      tags:
+      - "image"
+      summary: "All image"
+      description: "Returns all image from the system that the user has access to"
+      operationId: "findImages"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "tags"
+        in: "query"
+        description: "tags to filter by"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "csv"
+        x-exportParamName: "Tags"
+      - name: "limit"
+        in: "query"
+        description: "Maximum number of results to return"
+        required: false
+        type: "integer"
+        format: "int32"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int32"
+      responses:
+        200:
+          description: "List of image"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Image"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+    post:
+      tags:
+      - "image"
+      description: "Creates a new image in the system"
+      operationId: "addImage"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "images"
+        description: "Image to add to the system"
+        required: true
+        schema:
+          $ref: "#/definitions/ImageInput"
+        x-exportParamName: "Images"
+      responses:
+        200:
+          description: "Image response"
+          schema:
+            $ref: "#/definitions/Image"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /journals/{id}:
+    get:
+      tags:
+      - "journal"
+      summary: "Find Journal by ID"
+      description: "Returns a single journal if the user has access"
+      operationId: "findJournalById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of journal to fetch"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Id"
+      responses:
+        200:
+          description: "Journal response"
+          schema:
+            $ref: "#/definitions/Journal"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /journals:
+    get:
+      tags:
+      - "journal"
+      summary: "All journal"
+      description: "Returns all journal from the system that the user has access to"
+      operationId: "findJournals"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "tags"
+        in: "query"
+        description: "tags to filter by"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "csv"
+        x-exportParamName: "Tags"
+      - name: "limit"
+        in: "query"
+        description: "Maximum number of results to return"
+        required: false
+        type: "integer"
+        format: "int32"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int32"
+      responses:
+        200:
+          description: "List of journal"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Journal"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+    post:
+      tags:
+      - "journal"
+      description: "Creates a new journal in the system"
+      operationId: "addJournal"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "journals"
+        description: "Journal to add to the system"
+        required: true
+        schema:
+          $ref: "#/definitions/JournalInput"
+        x-exportParamName: "Journals"
+      responses:
+        200:
+          description: "journal response"
+          schema:
+            $ref: "#/definitions/Journal"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /nominal_account_categories/{id}:
+    get:
+      tags:
+      - "nominal_account_category"
+      summary: "Find Nominal account category by ID"
+      description: "Returns a single nominal account category if the user has access"
+      operationId: "findNominalAccountCategoryById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of nominal account category to fetch"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Id"
+      responses:
+        200:
+          description: "Nominal account category response"
+          schema:
+            $ref: "#/definitions/NominalAccountCategory"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /nominal_account_categories:
+    get:
+      tags:
+      - "nominal_account_category"
+      summary: "All nominal account category"
+      description: "Returns all nominal account category from the system that the\
+        \ user has access to"
+      operationId: "findNominalAccountCategories"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "tags"
+        in: "query"
+        description: "tags to filter by"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "csv"
+        x-exportParamName: "Tags"
+      - name: "limit"
+        in: "query"
+        description: "Maximum number of results to return"
+        required: false
+        type: "integer"
+        format: "int32"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int32"
+      responses:
+        200:
+          description: "List of nominal account category"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/NominalAccountCategory"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+    post:
+      tags:
+      - "nominal_account_category"
+      description: "Creates a new nominal account category in the system"
+      operationId: "addNominalAccountCategory"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "nominal_account_categories"
+        description: "Nominal account category to add to the system"
+        required: true
+        schema:
+          $ref: "#/definitions/NominalAccountCategoryInput"
+        x-exportParamName: "NominalAccountCategories"
+      responses:
+        200:
+          description: "nominal account category response"
+          schema:
+            $ref: "#/definitions/NominalAccountCategory"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /nominal_accounts/{id}:
+    get:
+      tags:
+      - "nominal_account"
+      summary: "Find Nominal account by ID"
+      description: "Returns a single nominal account if the user has access"
+      operationId: "findNominalAccountById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of nominal account to fetch"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Id"
+      responses:
+        200:
+          description: "Nominal account response"
+          schema:
+            $ref: "#/definitions/NominalAccount"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /nominal_accounts:
+    get:
+      tags:
+      - "nominal_account"
+      summary: "All nominal account"
+      description: "Returns all nominal account from the system that the user has\
+        \ access to"
+      operationId: "findNominalAccounts"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "tags"
+        in: "query"
+        description: "tags to filter by"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "csv"
+        x-exportParamName: "Tags"
+      - name: "limit"
+        in: "query"
+        description: "Maximum number of results to return"
+        required: false
+        type: "integer"
+        format: "int32"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int32"
+      responses:
+        200:
+          description: "List of nominal account"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/NominalAccount"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+    post:
+      tags:
+      - "nominal_account"
+      description: "Creates a new nominal account in the system"
+      operationId: "addNominalAccount"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "nominal_accounts"
+        description: "Nominal account to add to the system"
+        required: true
+        schema:
+          $ref: "#/definitions/NominalAccountInput"
+        x-exportParamName: "NominalAccounts"
+      responses:
+        200:
+          description: "nominal account response"
+          schema:
+            $ref: "#/definitions/NominalAccount"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /partners/{id}:
+    get:
+      tags:
+      - "partner"
+      summary: "Find Partner by ID"
+      description: "Returns a single partner if the user has access"
+      operationId: "findPartnerById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of partner to fetch"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Id"
+      responses:
+        200:
+          description: "Partner response"
+          schema:
+            $ref: "#/definitions/Customer"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /partners:
+    get:
+      tags:
+      - "partner"
+      summary: "All partners"
+      description: "Returns all partners from the system that the user has access\
+        \ to"
+      operationId: "findPartners"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "tags"
+        in: "query"
+        description: "tags to filter by"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "csv"
+        x-exportParamName: "Tags"
+      - name: "limit"
+        in: "query"
+        description: "Maximum number of results to return"
+        required: false
+        type: "integer"
+        format: "int32"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int32"
+      responses:
+        200:
+          description: "List of partner"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Partner"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+    post:
+      tags:
+      - "partner"
+      description: "Creates a new partner in the system"
+      operationId: "addPartner"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "partners"
+        description: "Partner to add to the system"
+        required: true
+        schema:
+          $ref: "#/definitions/PartnerInput"
+        x-exportParamName: "Partners"
+      responses:
+        200:
+          description: "Partner response"
+          schema:
+            $ref: "#/definitions/Partner"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /partner_addresses/{id}:
+    get:
+      tags:
+      - "partner_address"
+      summary: "Find Partner address by ID"
+      description: "Returns a single partner address if the user has access"
+      operationId: "findPartnerAddressById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of partner address to fetch"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Id"
+      responses:
+        200:
+          description: "Partner address response"
+          schema:
+            $ref: "#/definitions/PartnerAddress"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /partner_addresses:
+    get:
+      tags:
+      - "partner_address"
+      summary: "All partner address"
+      description: "Returns all partner address from the system that the user has\
+        \ access to"
+      operationId: "findPartnerAddresses"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "tags"
+        in: "query"
+        description: "tags to filter by"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "csv"
+        x-exportParamName: "Tags"
+      - name: "limit"
+        in: "query"
+        description: "Maximum number of results to return"
+        required: false
+        type: "integer"
+        format: "int32"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int32"
+      responses:
+        200:
+          description: "List of partner address"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/PartnerAddress"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+    post:
+      tags:
+      - "partner_address"
+      description: "Creates a new partner address in the system"
+      operationId: "addPartnerAddress"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "partner_addresses"
+        description: "Partner address to add to the system"
+        required: true
+        schema:
+          $ref: "#/definitions/PartnerAddressInput"
+        x-exportParamName: "PartnerAddresses"
+      responses:
+        200:
+          description: "partner address response"
+          schema:
+            $ref: "#/definitions/PartnerAddress"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /product_categories/{id}:
+    get:
+      tags:
+      - "product_category"
+      summary: "Find Product category by ID"
+      description: "Returns a single product category if the user has access"
+      operationId: "findProductCategoryById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of product category to fetch"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Id"
+      responses:
+        200:
+          description: "Product category response"
+          schema:
+            $ref: "#/definitions/ProductCategory"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /product_categories:
+    get:
+      tags:
+      - "product_category"
+      summary: "All product category"
+      description: "Returns all product category from the system that the user has\
+        \ access to"
+      operationId: "findProductCategories"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "tags"
+        in: "query"
+        description: "tags to filter by"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "csv"
+        x-exportParamName: "Tags"
+      - name: "limit"
+        in: "query"
+        description: "Maximum number of results to return"
+        required: false
+        type: "integer"
+        format: "int32"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int32"
+      responses:
+        200:
+          description: "List of product category"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/ProductCategory"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+    post:
+      tags:
+      - "product_category"
+      description: "Creates a new product category in the system"
+      operationId: "addProductCategory"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "product_categories"
+        description: "Product category to add to the system"
+        required: true
+        schema:
+          $ref: "#/definitions/ProductCategoryInput"
+        x-exportParamName: "ProductCategories"
+      responses:
+        200:
+          description: "product category response"
+          schema:
+            $ref: "#/definitions/ProductCategory"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /products/{id}:
+    get:
+      tags:
+      - "product"
+      summary: "Find Product by ID"
+      description: "Returns a single product if the user has access"
+      operationId: "findProductById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of product to fetch"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Id"
+      responses:
+        200:
+          description: "Product response"
+          schema:
+            $ref: "#/definitions/Product"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /products:
+    get:
+      tags:
+      - "product"
+      summary: "All product"
+      description: "Returns all product from the system that the user has access to"
+      operationId: "findProducts"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "tags"
+        in: "query"
+        description: "tags to filter by"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "csv"
+        x-exportParamName: "Tags"
+      - name: "limit"
+        in: "query"
+        description: "Maximum number of results to return"
+        required: false
+        type: "integer"
+        format: "int32"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int32"
+      responses:
+        200:
+          description: "List of product"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Product"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+    post:
+      tags:
+      - "product"
+      description: "Creates a new product in the system"
+      operationId: "addProduct"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "products"
+        description: "Product to add to the system"
+        required: true
+        schema:
+          $ref: "#/definitions/ProductInput"
+        x-exportParamName: "Products"
+      responses:
+        200:
+          description: "product response"
+          schema:
+            $ref: "#/definitions/Product"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /product_variants/{id}:
+    get:
+      tags:
+      - "product_variant"
+      summary: "Find Product variant by ID"
+      description: "Returns a single product variant if the user has access"
+      operationId: "findProductVariantById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of product variant to fetch"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Id"
+      responses:
+        200:
+          description: "Product variant response"
+          schema:
+            $ref: "#/definitions/ProductVariant"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /product_variants:
+    get:
+      tags:
+      - "product_variant"
+      summary: "All product variant"
+      description: "Returns all product variant from the system that the user has\
+        \ access to"
+      operationId: "findProductVariants"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "tags"
+        in: "query"
+        description: "tags to filter by"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "csv"
+        x-exportParamName: "Tags"
+      - name: "limit"
+        in: "query"
+        description: "Maximum number of results to return"
+        required: false
+        type: "integer"
+        format: "int32"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int32"
+      responses:
+        200:
+          description: "List of product variant"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/ProductVariant"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+    post:
+      tags:
+      - "product_variant"
+      description: "Creates a new product variant in the system"
+      operationId: "addProductVariant"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "product_variants"
+        description: "Product variant to add to the system"
+        required: true
+        schema:
+          $ref: "#/definitions/ProductVariantInput"
+        x-exportParamName: "ProductVariants"
+      responses:
+        200:
+          description: "product variant response"
+          schema:
+            $ref: "#/definitions/ProductVariant"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /product_prices/{id}:
+    get:
+      tags:
+      - "product_price"
+      summary: "Find Product price by ID"
+      description: "Returns a single product price if the user has access"
+      operationId: "findProductPriceById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of product price to fetch"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Id"
+      responses:
+        200:
+          description: "Product price response"
+          schema:
+            $ref: "#/definitions/ProductPrice"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /product_prices:
+    get:
+      tags:
+      - "product_price"
+      summary: "All product price"
+      description: "Returns all product price from the system that the user has access\
+        \ to"
+      operationId: "findProductPrices"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "tags"
+        in: "query"
+        description: "tags to filter by"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "csv"
+        x-exportParamName: "Tags"
+      - name: "limit"
+        in: "query"
+        description: "Maximum number of results to return"
+        required: false
+        type: "integer"
+        format: "int32"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int32"
+      responses:
+        200:
+          description: "List of product price"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/ProductPrice"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+    post:
+      tags:
+      - "product_price"
+      description: "Creates a new product price in the system"
+      operationId: "addProductPrice"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "product_prices"
+        description: "Product price to add to the system"
+        required: true
+        schema:
+          $ref: "#/definitions/ProductPriceInput"
+        x-exportParamName: "ProductPrices"
+      responses:
+        200:
+          description: "product price response"
+          schema:
+            $ref: "#/definitions/ProductPrice"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /production_orders/{id}:
+    get:
+      tags:
+      - "production_order"
+      summary: "Find Production order by ID"
+      description: "Returns a single production order if the user has access"
+      operationId: "findProductionOrderById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of production order to fetch"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Id"
+      responses:
+        200:
+          description: "Production order response"
+          schema:
+            $ref: "#/definitions/ProductionOrder"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /production_orders:
+    get:
+      tags:
+      - "production_order"
+      summary: "All production order"
+      description: "Returns all production order from the system that the user has\
+        \ access to"
+      operationId: "findProductionOrders"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "tags"
+        in: "query"
+        description: "tags to filter by"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "csv"
+        x-exportParamName: "Tags"
+      - name: "limit"
+        in: "query"
+        description: "Maximum number of results to return"
+        required: false
+        type: "integer"
+        format: "int32"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int32"
+      responses:
+        200:
+          description: "List of production order"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/ProductionOrder"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+    post:
+      tags:
+      - "production_order"
+      description: "Creates a new production order in the system"
+      operationId: "addProductionOrder"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "production_orders"
+        description: "Production order to add to the system"
+        required: true
+        schema:
+          $ref: "#/definitions/ProductionOrderInput"
+        x-exportParamName: "ProductionOrders"
+      responses:
+        200:
+          description: "production order response"
+          schema:
+            $ref: "#/definitions/ProductionOrder"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /purchase_invoices/{id}:
+    get:
+      tags:
+      - "purchase_invoice"
+      summary: "Find Purchase invoice by ID"
+      description: "Returns a single purchase invoice if the user has access"
+      operationId: "findPurchaseInvoiceById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of purchase invoice to fetch"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Id"
+      responses:
+        200:
+          description: "Purchase invoice response"
+          schema:
+            $ref: "#/definitions/PurchaseInvoice"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /purchase_invoices:
+    get:
+      tags:
+      - "purchase_invoice"
+      summary: "All purchase invoice"
+      description: "Returns all purchase invoice from the system that the user has\
+        \ access to"
+      operationId: "findPurchaseInvoices"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "tags"
+        in: "query"
+        description: "tags to filter by"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "csv"
+        x-exportParamName: "Tags"
+      - name: "limit"
+        in: "query"
+        description: "Maximum number of results to return"
+        required: false
+        type: "integer"
+        format: "int32"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int32"
+      responses:
+        200:
+          description: "List of purchase invoice"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/PurchaseInvoice"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+    post:
+      tags:
+      - "purchase_invoice"
+      description: "Creates a new purchase invoice in the system"
+      operationId: "addPurchaseInvoice"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "purchase_invoices"
+        description: "Purchase invoice to add to the system"
+        required: true
+        schema:
+          $ref: "#/definitions/PurchaseInvoiceInput"
+        x-exportParamName: "PurchaseInvoices"
+      responses:
+        200:
+          description: "purchase invoice response"
+          schema:
+            $ref: "#/definitions/PurchaseInvoice"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /purchase_orders/{id}:
+    get:
+      tags:
+      - "purchase_order"
+      summary: "Find Purchase order by ID"
+      description: "Returns a single purchase order if the user has access"
+      operationId: "findPurchaseOrderById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of purchase order to fetch"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Id"
+      responses:
+        200:
+          description: "Purchase order response"
+          schema:
+            $ref: "#/definitions/PurchaseOrder"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /purchase_orders:
+    get:
+      tags:
+      - "purchase_order"
+      summary: "All purchase order"
+      description: "Returns all purchase order from the system that the user has access\
+        \ to"
+      operationId: "findPurchaseOrders"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "tags"
+        in: "query"
+        description: "tags to filter by"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "csv"
+        x-exportParamName: "Tags"
+      - name: "limit"
+        in: "query"
+        description: "Maximum number of results to return"
+        required: false
+        type: "integer"
+        format: "int32"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int32"
+      responses:
+        200:
+          description: "List of purchase order"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/PurchaseOrder"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+    post:
+      tags:
+      - "purchase_order"
+      description: "Creates a new purchase order in the system"
+      operationId: "addPurchaseOrder"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "purchase_orders"
+        description: "Purchase order to add to the system"
+        required: true
+        schema:
+          $ref: "#/definitions/PurchaseOrderInput"
+        x-exportParamName: "PurchaseOrders"
+      responses:
+        200:
+          description: "purchase order response"
+          schema:
+            $ref: "#/definitions/PurchaseOrder"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /sales_invoices/{id}:
+    get:
+      tags:
+      - "sales_invoice"
+      summary: "Find Sales invoice by ID"
+      description: "Returns a single sales invoice if the user has access"
+      operationId: "findSalesInvoiceById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of sales invoice to fetch"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Id"
+      responses:
+        200:
+          description: "Sales invoice response"
+          schema:
+            $ref: "#/definitions/SalesInvoice"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /sales_invoices:
+    get:
+      tags:
+      - "sales_invoice"
+      summary: "All sales invoice"
+      description: "Returns all sales invoice from the system that the user has access\
+        \ to"
+      operationId: "findSalesInvoices"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "tags"
+        in: "query"
+        description: "tags to filter by"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "csv"
+        x-exportParamName: "Tags"
+      - name: "limit"
+        in: "query"
+        description: "Maximum number of results to return"
+        required: false
+        type: "integer"
+        format: "int32"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int32"
+      responses:
+        200:
+          description: "List of sales invoice"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/SalesInvoice"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+    post:
+      tags:
+      - "sales_invoice"
+      description: "Creates a new sales invoice in the system"
+      operationId: "addSalesInvoice"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "sales_invoices"
+        description: "Sales invoice to add to the system"
+        required: true
+        schema:
+          $ref: "#/definitions/SalesInvoiceInput"
+        x-exportParamName: "SalesInvoices"
+      responses:
+        200:
+          description: "sales invoice response"
+          schema:
+            $ref: "#/definitions/SalesInvoice"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /sales_orders/{id}:
+    get:
+      tags:
+      - "sales_order"
+      summary: "Find Sales order by ID"
+      description: "Returns a single sales order if the user has access"
+      operationId: "findSalesOrderById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of sales order to fetch"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Id"
+      responses:
+        200:
+          description: "Sales order response"
+          schema:
+            $ref: "#/definitions/SalesOrder"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /sales_orders:
+    get:
+      tags:
+      - "sales_order"
+      summary: "All sales order"
+      description: "Returns all sales order from the system that the user has access\
+        \ to"
+      operationId: "findSalesOrder"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "tags"
+        in: "query"
+        description: "tags to filter by"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "csv"
+        x-exportParamName: "Tags"
+      - name: "limit"
+        in: "query"
+        description: "Maximum number of results to return"
+        required: false
+        type: "integer"
+        format: "int32"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int32"
+      responses:
+        200:
+          description: "List of sales order"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/SalesOrder"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+    post:
+      tags:
+      - "sales_order"
+      description: "Creates a new sales order in the system"
+      operationId: "addSalesOrder"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "sales_orders"
+        description: "Sales order to add to the system"
+        required: true
+        schema:
+          $ref: "#/definitions/SalesOrderInput"
+        x-exportParamName: "SalesOrders"
+      responses:
+        200:
+          description: "sales order response"
+          schema:
+            $ref: "#/definitions/SalesOrder"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /shipping_centres/{id}:
+    get:
+      tags:
+      - "shipping_centre"
+      summary: "Find Shipping centre by ID"
+      description: "Returns a single shipping centre if the user has access"
+      operationId: "findShippingCentreById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of shipping centre to fetch"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Id"
+      responses:
+        200:
+          description: "Shipping centre response"
+          schema:
+            $ref: "#/definitions/ShippingCentre"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /shipping_centres:
+    get:
+      tags:
+      - "shipping_centre"
+      summary: "All shipping centre"
+      description: "Returns all shipping centre from the system that the user has\
+        \ access to"
+      operationId: "findShippingCentres"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "tags"
+        in: "query"
+        description: "tags to filter by"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "csv"
+        x-exportParamName: "Tags"
+      - name: "limit"
+        in: "query"
+        description: "Maximum number of results to return"
+        required: false
+        type: "integer"
+        format: "int32"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int32"
+      responses:
+        200:
+          description: "List of shipping centre"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/ShippingCentre"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+    post:
+      tags:
+      - "shipping_centre"
+      description: "Creates a new shipping centre in the system"
+      operationId: "addShippingCentre"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "shipping_centres"
+        description: "Shipping centre to add to the system"
+        required: true
+        schema:
+          $ref: "#/definitions/ShippingCentreInput"
+        x-exportParamName: "ShippingCentres"
+      responses:
+        200:
+          description: "shipping centre response"
+          schema:
+            $ref: "#/definitions/ShippingCentre"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /stock_adjustments/{id}:
+    get:
+      tags:
+      - "stock_adjustment"
+      summary: "Find Stock adjustment by ID"
+      description: "Returns a single stock adjustment if the user has access"
+      operationId: "findStockAdjustmentById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of stock adjustment to fetch"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Id"
+      responses:
+        200:
+          description: "Stock adjustment response"
+          schema:
+            $ref: "#/definitions/StockAdjustment"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /stock_adjustments:
+    get:
+      tags:
+      - "stock_adjustment"
+      summary: "All stock adjustment"
+      description: "Returns all stock adjustment from the system that the user has\
+        \ access to"
+      operationId: "findStockAdjustments"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "tags"
+        in: "query"
+        description: "tags to filter by"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "csv"
+        x-exportParamName: "Tags"
+      - name: "limit"
+        in: "query"
+        description: "Maximum number of results to return"
+        required: false
+        type: "integer"
+        format: "int32"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int32"
+      responses:
+        200:
+          description: "List of stock adjustment"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/StockAdjustment"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+    post:
+      tags:
+      - "stock_adjustment"
+      description: "Creates a new stock adjustment in the system"
+      operationId: "addStockAdjustment"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "stock_adjustments"
+        description: "Stock adjustment to add to the system"
+        required: true
+        schema:
+          $ref: "#/definitions/StockAdjustmentInput"
+        x-exportParamName: "StockAdjustments"
+      responses:
+        200:
+          description: "stock adjustment response"
+          schema:
+            $ref: "#/definitions/StockAdjustment"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /stock_categories/{id}:
+    get:
+      tags:
+      - "stock_category"
+      summary: "Find Stock category by ID"
+      description: "Returns a single stock category if the user has access"
+      operationId: "findStockCategoryById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of stock category to fetch"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Id"
+      responses:
+        200:
+          description: "Stock category response"
+          schema:
+            $ref: "#/definitions/StockCategory"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /stock_categories:
+    get:
+      tags:
+      - "stock_category"
+      summary: "All stock category"
+      description: "Returns all stock category from the system that the user has access\
+        \ to"
+      operationId: "findStockCategories"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "tags"
+        in: "query"
+        description: "tags to filter by"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "csv"
+        x-exportParamName: "Tags"
+      - name: "limit"
+        in: "query"
+        description: "Maximum number of results to return"
+        required: false
+        type: "integer"
+        format: "int32"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int32"
+      responses:
+        200:
+          description: "List of stock category"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/StockCategory"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+    post:
+      tags:
+      - "stock_category"
+      description: "Creates a new stock category in the system"
+      operationId: "addStockCategory"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "stock_categories"
+        description: "Stock category to add to the system"
+        required: true
+        schema:
+          $ref: "#/definitions/StockCategoryInput"
+        x-exportParamName: "StockCategories"
+      responses:
+        200:
+          description: "stock category response"
+          schema:
+            $ref: "#/definitions/StockCategory"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /stock_items/{id}:
+    get:
+      tags:
+      - "stock_item"
+      summary: "Find Stock item by ID"
+      description: "Returns a single stock item if the user has access"
+      operationId: "findStockItemById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of stock item to fetch"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Id"
+      responses:
+        200:
+          description: "Stock item response"
+          schema:
+            $ref: "#/definitions/StockItem"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /stock_items:
+    get:
+      tags:
+      - "stock_item"
+      summary: "All stock item"
+      description: "Returns all stock item from the system that the user has access\
+        \ to"
+      operationId: "findStockItems"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "tags"
+        in: "query"
+        description: "tags to filter by"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "csv"
+        x-exportParamName: "Tags"
+      - name: "limit"
+        in: "query"
+        description: "Maximum number of results to return"
+        required: false
+        type: "integer"
+        format: "int32"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int32"
+      responses:
+        200:
+          description: "List of stock item"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/StockItem"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+    post:
+      tags:
+      - "stock_item"
+      description: "Creates a new stock item in the system"
+      operationId: "addStockItem"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "stock_items"
+        description: "Stock item to add to the system"
+        required: true
+        schema:
+          $ref: "#/definitions/StockItemInput"
+        x-exportParamName: "StockItems"
+      responses:
+        200:
+          description: "stock item response"
+          schema:
+            $ref: "#/definitions/StockItem"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /stock_locations/{id}:
+    get:
+      tags:
+      - "stock_location"
+      summary: "Find Stock location by ID"
+      description: "Returns a single stock location if the user has access"
+      operationId: "findStockLocationById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of stock location to fetch"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Id"
+      responses:
+        200:
+          description: "Stock location response"
+          schema:
+            $ref: "#/definitions/StockLocation"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /stock_locations:
+    get:
+      tags:
+      - "stock_location"
+      summary: "All stock location"
+      description: "Returns all stock location from the system that the user has access\
+        \ to"
+      operationId: "findStockLocations"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "tags"
+        in: "query"
+        description: "tags to filter by"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "csv"
+        x-exportParamName: "Tags"
+      - name: "limit"
+        in: "query"
+        description: "Maximum number of results to return"
+        required: false
+        type: "integer"
+        format: "int32"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int32"
+      responses:
+        200:
+          description: "List of stock location"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/StockLocation"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+    post:
+      tags:
+      - "stock_location"
+      description: "Creates a new stock location in the system"
+      operationId: "addStockLocation"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "stock_locations"
+        description: "Stock location to add to the system"
+        required: true
+        schema:
+          $ref: "#/definitions/StockLocationInput"
+        x-exportParamName: "StockLocations"
+      responses:
+        200:
+          description: "stock location response"
+          schema:
+            $ref: "#/definitions/StockLocation"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /stock_suppliers/{id}:
+    get:
+      tags:
+      - "stock_supplier"
+      summary: "Find Stock supplier by ID"
+      description: "Returns a single stock supplier if the user has access"
+      operationId: "findStockSupplierById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of stock supplier to fetch"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Id"
+      responses:
+        200:
+          description: "Stock supplier response"
+          schema:
+            $ref: "#/definitions/StockSupplier"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /stock_suppliers:
+    get:
+      tags:
+      - "stock_supplier"
+      summary: "All stock supplier"
+      description: "Returns all stock supplier from the system that the user has access\
+        \ to"
+      operationId: "findStockSuppliers"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "tags"
+        in: "query"
+        description: "tags to filter by"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "csv"
+        x-exportParamName: "Tags"
+      - name: "limit"
+        in: "query"
+        description: "Maximum number of results to return"
+        required: false
+        type: "integer"
+        format: "int32"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int32"
+      responses:
+        200:
+          description: "List of stock supplier"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/StockSupplier"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+    post:
+      tags:
+      - "stock_supplier"
+      description: "Creates a new stock supplier in the system"
+      operationId: "addStockSupplier"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "stock_suppliers"
+        description: "Stock supplier to add to the system"
+        required: true
+        schema:
+          $ref: "#/definitions/StockSupplierInput"
+        x-exportParamName: "StockSuppliers"
+      responses:
+        200:
+          description: "stock supplier response"
+          schema:
+            $ref: "#/definitions/StockSupplier"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /vat_records/{id}:
+    get:
+      tags:
+      - "vat_record"
+      summary: "Find VAT record by ID"
+      description: "Returns a single vat record if the user has access"
+      operationId: "findVatRecordById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of vat record to fetch"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Id"
+      responses:
+        200:
+          description: "VAT record response"
+          schema:
+            $ref: "#/definitions/VatRecord"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /vat_records:
+    get:
+      tags:
+      - "vat_record"
+      summary: "All vat record"
+      description: "Returns all vat record from the system that the user has access\
+        \ to"
+      operationId: "findVatRecords"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "tags"
+        in: "query"
+        description: "tags to filter by"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "csv"
+        x-exportParamName: "Tags"
+      - name: "limit"
+        in: "query"
+        description: "Maximum number of results to return"
+        required: false
+        type: "integer"
+        format: "int32"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int32"
+      responses:
+        200:
+          description: "List of vat record"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/VatRecord"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+    post:
+      tags:
+      - "vat_record"
+      description: "Creates a new vat record in the system"
+      operationId: "addVatRecord"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "vat_records"
+        description: "VAT record to add to the system"
+        required: true
+        schema:
+          $ref: "#/definitions/VatRecordInput"
+        x-exportParamName: "VatRecords"
+      responses:
+        200:
+          description: "vat record response"
+          schema:
+            $ref: "#/definitions/VatRecord"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /vat_returns/{id}:
+    get:
+      tags:
+      - "vat_return"
+      summary: "Find VAT return by ID"
+      description: "Returns a single vat return if the user has access"
+      operationId: "findVatReturnById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of vat return to fetch"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Id"
+      responses:
+        200:
+          description: "VAT return response"
+          schema:
+            $ref: "#/definitions/VatReturn"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /vat_returns:
+    get:
+      tags:
+      - "vat_return"
+      summary: "All vat return"
+      description: "Returns all vat return from the system that the user has access\
+        \ to"
+      operationId: "findVatReturns"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "tags"
+        in: "query"
+        description: "tags to filter by"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "csv"
+        x-exportParamName: "Tags"
+      - name: "limit"
+        in: "query"
+        description: "Maximum number of results to return"
+        required: false
+        type: "integer"
+        format: "int32"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int32"
+      responses:
+        200:
+          description: "List of vat return"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/VatReturn"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+    post:
+      tags:
+      - "vat_return"
+      description: "Creates a new vat return in the system"
+      operationId: "addVatReturn"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "vat_returns"
+        description: "VAT return to add to the system"
+        required: true
+        schema:
+          $ref: "#/definitions/VatReturnInput"
+        x-exportParamName: "VatReturns"
+      responses:
+        200:
+          description: "vat return response"
+          schema:
+            $ref: "#/definitions/VatReturn"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /work_centre_groups/{id}:
+    get:
+      tags:
+      - "work_centre_group"
+      summary: "Find Work centre group by ID"
+      description: "Returns a single work centre group if the user has access"
+      operationId: "findWorkCentreGroupById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of work centre group to fetch"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Id"
+      responses:
+        200:
+          description: "Work centre group response"
+          schema:
+            $ref: "#/definitions/WorkCentreGroup"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /work_centre_groups:
+    get:
+      tags:
+      - "work_centre_group"
+      summary: "All work centre group"
+      description: "Returns all work centre group from the system that the user has\
+        \ access to"
+      operationId: "findWorkCentreGroups"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "tags"
+        in: "query"
+        description: "tags to filter by"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "csv"
+        x-exportParamName: "Tags"
+      - name: "limit"
+        in: "query"
+        description: "Maximum number of results to return"
+        required: false
+        type: "integer"
+        format: "int32"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int32"
+      responses:
+        200:
+          description: "List of work centre group"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/WorkCentreGroup"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /work_centres/{id}:
+    get:
+      tags:
+      - "work_centre"
+      summary: "Find Work centre by ID"
+      description: "Returns a single work centre if the user has access"
+      operationId: "findWorkCentreById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of work centre to fetch"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Id"
+      responses:
+        200:
+          description: "Work centre response"
+          schema:
+            $ref: "#/definitions/WorkCentre"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+  /work_centre_groups/{work_centre_group_id}/work_centres:
+    get:
+      tags:
+      - "work_centre"
+      summary: "All work centre"
+      description: "Returns all work centre from the system that the user has access\
+        \ to"
+      operationId: "findWorkCentres"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "work_centre_group_id"
+        in: "path"
+        description: "ID of Work Centre Group for list of Work Centres"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "WorkCentreGroupId"
+      - name: "tags"
+        in: "query"
+        description: "tags to filter by"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "csv"
+        x-exportParamName: "Tags"
+      - name: "limit"
+        in: "query"
+        description: "Maximum number of results to return"
+        required: false
+        type: "integer"
+        format: "int32"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int32"
+      responses:
+        200:
+          description: "List of work centre"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/WorkCentre"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/ErrorModel"
+securityDefinitions:
+  api_key:
+    type: "apiKey"
+    name: "ApiKey"
+    in: "header"
+definitions:
+  AddressBlock:
+    required:
+    - "id"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+    example:
+      id: 0
+  AddressBlockInput:
+    allOf:
+    - $ref: "#/definitions/AddressBlock"
+    - properties:
+        id:
+          type: "integer"
+          format: "int64"
+  BankAccountInput:
+    required:
+    - "bank_name"
+    - "country_name"
+    - "currency_code"
+    - "iban"
+    - "name"
+    - "swift"
+    properties:
+      name:
+        type: "string"
+      bank_name:
+        type: "string"
+      currency_code:
+        type: "string"
+      swift:
+        type: "string"
+      iban:
+        type: "string"
+      address1:
+        type: "string"
+      address2:
+        type: "string"
+      address3:
+        type: "string"
+      city:
+        type: "string"
+      state_county:
+        type: "string"
+      zip_postcode:
+        type: "string"
+      country_name:
+        type: "string"
+      contact_name:
+        type: "string"
+      phone:
+        type: "string"
+      email:
+        type: "string"
+      website:
+        type: "string"
+    description: "Bank account information"
+    example:
+      contact_name: "contact_name"
+      website: "website"
+      address3: "address3"
+      address2: "address2"
+      city: "city"
+      address1: "address1"
+      zip_postcode: "zip_postcode"
+      currency_code: "currency_code"
+      state_county: "state_county"
+      phone: "phone"
+      iban: "iban"
+      name: "name"
+      bank_name: "bank_name"
+      country_name: "country_name"
+      email: "email"
+      swift: "swift"
+  BankAccount:
+    allOf:
+    - properties:
+        id:
+          type: "integer"
+          format: "int64"
+    - $ref: "#/definitions/BankAccountInput"
+  BankStatement:
+    required:
+    - "id"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+    example:
+      id: 0
+  BankStatementInput:
+    allOf:
+    - $ref: "#/definitions/BankStatement"
+    - properties:
+        id:
+          type: "integer"
+          format: "int64"
+  BankStatementData:
+    required:
+    - "id"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+  BankStatementDataInput:
+    allOf:
+    - $ref: "#/definitions/BankStatementData"
+    - properties:
+        id:
+          type: "integer"
+          format: "int64"
+  BeanieTask:
+    required:
+    - "id"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+    example:
+      id: 0
+  BeanieTaskInput:
+    allOf:
+    - $ref: "#/definitions/BeanieTask"
+    - properties:
+        id:
+          type: "integer"
+          format: "int64"
+  Billable:
+    required:
+    - "id"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+    example:
+      id: 0
+  BillableInput:
+    allOf:
+    - $ref: "#/definitions/Billable"
+    - properties:
+        id:
+          type: "integer"
+          format: "int64"
+  BillOfMaterial:
+    required:
+    - "id"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+    example:
+      id: 0
+  BillOfMaterialInput:
+    allOf:
+    - $ref: "#/definitions/BillOfMaterial"
+    - properties:
+        id:
+          type: "integer"
+          format: "int64"
+  BomItem:
+    required:
+    - "id"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+  BomItemInput:
+    allOf:
+    - $ref: "#/definitions/BomItem"
+    - properties:
+        id:
+          type: "integer"
+          format: "int64"
+  Company:
+    required:
+    - "id"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+    example:
+      id: 0
+  DeliveryNote:
+    required:
+    - "id"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+    example:
+      id: 0
+  DeliveryNoteInput:
+    allOf:
+    - $ref: "#/definitions/DeliveryNote"
+    - properties:
+        id:
+          type: "integer"
+          format: "int64"
+  DeliveryNoteItem:
+    required:
+    - "id"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+  DeliveryNoteItemInput:
+    allOf:
+    - $ref: "#/definitions/DeliveryNoteItem"
+    - properties:
+        id:
+          type: "integer"
+          format: "int64"
+  Document:
+    required:
+    - "id"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+    example:
+      id: 0
+  DocumentInput:
+    allOf:
+    - $ref: "#/definitions/Document"
+    - properties:
+        id:
+          type: "integer"
+          format: "int64"
+  FiscalYear:
+    required:
+    - "closed"
+    - "year"
+    properties:
+      year:
+        type: "integer"
+        format: "int32"
+      closed:
+        type: "boolean"
+  FixedAsset:
+    required:
+    - "id"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+    example:
+      id: 0
+  FixedAssetInput:
+    allOf:
+    - $ref: "#/definitions/FixedAsset"
+    - properties:
+        id:
+          type: "integer"
+          format: "int64"
+  GoodsReceivedNote:
+    required:
+    - "id"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+  GoodsReceivedNoteInput:
+    allOf:
+    - $ref: "#/definitions/GoodsReceivedNote"
+    - properties:
+        id:
+          type: "integer"
+          format: "int64"
+  Image:
+    required:
+    - "id"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+    example:
+      id: 0
+  ImageInput:
+    allOf:
+    - $ref: "#/definitions/Image"
+    - properties:
+        id:
+          type: "integer"
+          format: "int64"
+  Journal:
+    required:
+    - "id"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+    example:
+      id: 0
+  JournalInput:
+    allOf:
+    - $ref: "#/definitions/Journal"
+    - properties:
+        id:
+          type: "integer"
+          format: "int64"
+  JournalItem:
+    required:
+    - "id"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+  JournalItemInput:
+    allOf:
+    - $ref: "#/definitions/JournalItem"
+    - properties:
+        id:
+          type: "integer"
+          format: "int64"
+  NominalAccountCategory:
+    required:
+    - "id"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+    example:
+      id: 0
+  NominalAccountCategoryInput:
+    allOf:
+    - $ref: "#/definitions/NominalAccountCategory"
+    - properties:
+        id:
+          type: "integer"
+          format: "int64"
+  NominalAccount:
+    required:
+    - "id"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+    example:
+      id: 0
+  NominalAccountInput:
+    allOf:
+    - $ref: "#/definitions/NominalAccount"
+    - properties:
+        id:
+          type: "integer"
+          format: "int64"
+  Partner:
+    allOf:
+    - properties:
+        id:
+          type: "integer"
+          format: "int64"
+        code:
+          type: "string"
+        state:
+          type: "string"
+        credit_hold:
+          type: "boolean"
+        balance:
+          type: "number"
+          format: "double"
+        address_ids:
+          type: "array"
+          items:
+            type: "integer"
+            format: "int32"
+        notes:
+          type: "array"
+          items:
+            $ref: "#/definitions/PartnerNote"
+        receivables_ledgers:
+          type: "array"
+          items:
+            $ref: "#/definitions/ReceivablesLedger"
+        payables_ledgers:
+          type: "array"
+          items:
+            $ref: "#/definitions/PayablesLedger"
+    - $ref: "#/definitions/PartnerInput"
+    description: "Partner Details"
+  PartnerInput:
+    required:
+    - "currency_code"
+    - "name"
+    properties:
+      name:
+        type: "string"
+      currency_code:
+        type: "string"
+      net_terms:
+        type: "integer"
+        format: "int32"
+      credit_limit:
+        type: "number"
+        format: "double"
+      partner_vat:
+        type: "string"
+    description: "Partner Details"
+    example:
+      name: "name"
+      credit_limit: 6.027456183070403
+      net_terms: 0
+      partner_vat: "partner_vat"
+      currency_code: "currency_code"
+  PartnerAddress:
+    required:
+    - "id"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+    example:
+      id: 0
+  PartnerAddressInput:
+    allOf:
+    - $ref: "#/definitions/PartnerAddress"
+    - properties:
+        id:
+          type: "integer"
+          format: "int64"
+  PartnerNote:
+    required:
+    - "author"
+    - "date"
+    - "note"
+    properties:
+      date:
+        type: "string"
+        format: "date-time"
+      author:
+        type: "string"
+      note:
+        type: "string"
+  PayablesLedger:
+    required:
+    - "amount"
+    - "date"
+    - "ledger_type"
+    - "narrative"
+    - "reconciled"
+    properties:
+      date:
+        type: "string"
+        format: "date"
+      ledger_type:
+        type: "string"
+      narrative:
+        type: "string"
+      amount:
+        type: "number"
+        format: "double"
+      reconciled:
+        type: "boolean"
+      journal_id:
+        type: "integer"
+        format: "int64"
+      sales_invoice_id:
+        type: "integer"
+        format: "int64"
+  ProductCategory:
+    required:
+    - "id"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+    example:
+      id: 0
+  ProductCategoryInput:
+    allOf:
+    - $ref: "#/definitions/ProductCategory"
+    - properties:
+        id:
+          type: "integer"
+          format: "int64"
+  Product:
+    required:
+    - "id"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+    example:
+      id: 0
+  ProductInput:
+    allOf:
+    - $ref: "#/definitions/Product"
+    - properties:
+        id:
+          type: "integer"
+          format: "int64"
+  ProductVariant:
+    required:
+    - "id"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+    example:
+      id: 0
+  ProductVariantInput:
+    allOf:
+    - $ref: "#/definitions/ProductVariant"
+    - properties:
+        id:
+          type: "integer"
+          format: "int64"
+  ProductPrice:
+    required:
+    - "id"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+    example:
+      id: 0
+  ProductPriceInput:
+    allOf:
+    - $ref: "#/definitions/ProductPrice"
+    - properties:
+        id:
+          type: "integer"
+          format: "int64"
+  ProductionOrder:
+    allOf:
+    - properties:
+        id:
+          type: "integer"
+          format: "int64"
+        work_centre_group_id:
+          type: "integer"
+          format: "int64"
+        job_order:
+          type: "integer"
+          format: "int64"
+        state:
+          type: "string"
+        logs:
+          type: "array"
+          items:
+            $ref: "#/definitions/ProductionOrderLog"
+    - $ref: "#/definitions/ProductionOrderInput"
+    description: "Production Order Details"
+  ProductionOrderInput:
+    required:
+    - "priority"
+    - "quantity"
+    properties:
+      priority:
+        type: "integer"
+        format: "int32"
+      quantity:
+        type: "integer"
+        format: "int32"
+      notes:
+        type: "string"
+      bill_of_materials_id:
+        type: "integer"
+        format: "int64"
+      sales_order_id:
+        type: "integer"
+        format: "int64"
+    description: "Production Order Details"
+    example:
+      quantity: 6
+      notes: "notes"
+      sales_order_id: 5
+      priority: 0
+      bill_of_materials_id: 1
+  ProductionOrderLog:
+    required:
+    - "date"
+    - "member"
+    - "message"
+    properties:
+      date:
+        type: "string"
+        format: "date-time"
+      member:
+        type: "string"
+      message:
+        type: "string"
+  PurchaseInvoice:
+    required:
+    - "id"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+    example:
+      id: 0
+  PurchaseInvoiceInput:
+    allOf:
+    - $ref: "#/definitions/PurchaseInvoice"
+    - properties:
+        id:
+          type: "integer"
+          format: "int64"
+  PurchaseOrder:
+    required:
+    - "id"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+    example:
+      id: 0
+  PurchaseOrderInput:
+    allOf:
+    - $ref: "#/definitions/PurchaseOrder"
+    - properties:
+        id:
+          type: "integer"
+          format: "int64"
+  PurchaseOrderItem:
+    required:
+    - "id"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+  PurchaseOrderItemInput:
+    allOf:
+    - $ref: "#/definitions/PurchaseOrderItem"
+    - properties:
+        id:
+          type: "integer"
+          format: "int64"
+  ReceivablesLedger:
+    required:
+    - "amount"
+    - "date"
+    - "ledger_type"
+    - "narrative"
+    - "reconciled"
+    properties:
+      date:
+        type: "string"
+        format: "date"
+      ledger_type:
+        type: "string"
+      narrative:
+        type: "string"
+      amount:
+        type: "number"
+        format: "double"
+      reconciled:
+        type: "boolean"
+      journal_id:
+        type: "integer"
+        format: "int64"
+      sales_invoice_id:
+        type: "integer"
+        format: "int64"
+  SalesInvoice:
+    required:
+    - "id"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+    example:
+      id: 0
+  SalesInvoiceInput:
+    allOf:
+    - $ref: "#/definitions/SalesInvoice"
+    - properties:
+        id:
+          type: "integer"
+          format: "int64"
+  SalesInvoiceItem:
+    required:
+    - "id"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+  SalesInvoiceItemInput:
+    allOf:
+    - $ref: "#/definitions/SalesInvoiceItem"
+    - properties:
+        id:
+          type: "integer"
+          format: "int64"
+  SalesOrder:
+    required:
+    - "id"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+    example:
+      id: 0
+  SalesOrderInput:
+    allOf:
+    - $ref: "#/definitions/SalesOrder"
+    - properties:
+        id:
+          type: "integer"
+          format: "int64"
+  SalesOrderItem:
+    required:
+    - "id"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+  SalesOrderItemInput:
+    allOf:
+    - $ref: "#/definitions/SalesOrderItem"
+    - properties:
+        id:
+          type: "integer"
+          format: "int64"
+  ShippingCentre:
+    required:
+    - "id"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+    example:
+      id: 0
+  ShippingCentreInput:
+    allOf:
+    - $ref: "#/definitions/ShippingCentre"
+    - properties:
+        id:
+          type: "integer"
+          format: "int64"
+  StockLocation:
+    required:
+    - "id"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+    example:
+      id: 0
+  StockLocationInput:
+    allOf:
+    - $ref: "#/definitions/StockLocation"
+    - properties:
+        id:
+          type: "integer"
+          format: "int64"
+  StockCategory:
+    required:
+    - "id"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+    example:
+      id: 0
+  StockCategoryInput:
+    allOf:
+    - $ref: "#/definitions/StockCategory"
+    - properties:
+        id:
+          type: "integer"
+          format: "int64"
+  StockItem:
+    required:
+    - "id"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+    example:
+      id: 0
+  StockItemInput:
+    allOf:
+    - $ref: "#/definitions/StockItem"
+    - properties:
+        id:
+          type: "integer"
+          format: "int64"
+  StockSupplier:
+    required:
+    - "id"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+    example:
+      id: 0
+  StockSupplierInput:
+    allOf:
+    - $ref: "#/definitions/StockSupplier"
+    - properties:
+        id:
+          type: "integer"
+          format: "int64"
+  StockAdjustment:
+    required:
+    - "id"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+    example:
+      id: 0
+  StockAdjustmentInput:
+    allOf:
+    - $ref: "#/definitions/StockAdjustment"
+    - properties:
+        id:
+          type: "integer"
+          format: "int64"
+  VatRecord:
+    required:
+    - "id"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+    example:
+      id: 0
+  VatRecordInput:
+    allOf:
+    - $ref: "#/definitions/VatRecord"
+    - required:
+      - "name"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        name:
+          type: "string"
+  VatReturn:
+    required:
+    - "id"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+    example:
+      id: 0
+  VatReturnInput:
+    allOf:
+    - $ref: "#/definitions/VatReturn"
+    - properties:
+        id:
+          type: "integer"
+          format: "int64"
+  WorkCentreGroup:
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      created_at:
+        type: "string"
+        format: "date-time"
+      updated_at:
+        type: "string"
+        format: "date-time"
+      name:
+        type: "string"
+      description:
+        type: "string"
+      code:
+        type: "string"
+      url:
+        type: "string"
+    description: "Work Centre Group Details"
+    example:
+      code: "code"
+      updated_at: "2000-01-23T04:56:07.000+00:00"
+      name: "name"
+      created_at: "2000-01-23T04:56:07.000+00:00"
+      description: "description"
+      id: 0
+      url: "url"
+  WorkCentre:
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      created_at:
+        type: "string"
+        format: "date-time"
+      updated_at:
+        type: "string"
+        format: "date-time"
+      name:
+        type: "string"
+      description:
+        type: "string"
+      work_centre_group_id:
+        type: "integer"
+        format: "int64"
+      location:
+        type: "string"
+      state:
+        type: "integer"
+        format: "int64"
+      production_order_id:
+        type: "integer"
+        format: "int64"
+    description: "Work Centre Details"
+    example:
+      updated_at: "2000-01-23T04:56:07.000+00:00"
+      name: "name"
+      created_at: "2000-01-23T04:56:07.000+00:00"
+      description: "description"
+      production_order_id: 5
+      location: "location"
+      id: 0
+      state: 1
+      work_centre_group_id: 6
+  ErrorModel:
+    required:
+    - "code"
+    - "message"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+      message:
+        type: "string"
