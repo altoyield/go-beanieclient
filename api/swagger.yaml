@@ -2,11 +2,12 @@
 swagger: "2.0"
 info:
   description: "An API specification for interacting with the Beanie ERP system"
-  version: "0.2"
+  version: "0.8"
   title: "Beanie ERP API"
   termsOfService: "https://bean.ie/terms"
   contact:
     name: "Beanie ERP API Team"
+    url: "https://bean.ie/help/api"
     email: "dev@bean.ie"
   license:
     name: "Apache 2.0"
@@ -19,7 +20,7 @@ tags:
   externalDocs:
     description: "For more information, please consult the online help pages for the\
       \ API"
-    url: "https://bean.ie/api/help"
+    url: "https://bean.ie/help/api"
 schemes:
 - "https"
 consumes:
